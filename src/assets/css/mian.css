@@ -1,0 +1,232 @@
+@font-face {
+  font-family: 'IRANSans';
+  font-weight: normal;
+  font-style: normal;
+  src: url("../font/IRANSans.eot");
+  src: url("../font/IRANSans.eot?#iefix") format("embedded-opentype"), url("../font/IRANSans.svg#IRANSans") format("svg"), url("../font/IRANSans.ttf") format("truetype"), url("../font/IRANSans.woff") format("woff"), url("../font/IRANSans.woff2") format("woff2");
+}
+
+button {
+  border: 0;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  direction: rtl;
+  font-family: 'IRANSans';
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  height: 100vh;
+  color: #303030;
+}
+
+#wrapper {
+  margin: 20px;
+  min-width: 500px;
+  -webkit-box-shadow: 0 0 7px rgba(0, 0, 0, 0.25);
+          box-shadow: 0 0 7px rgba(0, 0, 0, 0.25);
+  border-radius: 5px;
+  text-align: center;
+  position: relative;
+}
+
+#wrapper .timer,
+#wrapper .numberQuestion {
+  position: absolute;
+  top: 25px;
+  font-size: 0.9rem;
+}
+
+#wrapper .numberQuestion {
+  right: 15px;
+}
+
+#wrapper .numberQuestion i {
+  vertical-align: -2px;
+  font-size: 0.9rem;
+}
+
+#wrapper .timer {
+  left: 15px;
+}
+
+#wrapper .timer i {
+  margin-left: 5px;
+  vertical-align: -2px;
+  font-size: 0.9rem;
+}
+
+#wrapper h3 {
+  padding: 25px 0 20px 0;
+  font-size: 1rem;
+  font-weight: normal;
+  border-bottom: 1px solid #ddd;
+}
+
+#wrapper p {
+  direction: ltr;
+  margin: 25px 0;
+  font-size: 1.2rem;
+}
+
+#wrapper p b {
+  font-size: 1rem;
+  display: block;
+  margin-top: 25px;
+  padding: 0 15px;
+  color: #d34949;
+}
+
+#wrapper #showAnswer {
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  -webkit-transition: 0.25s linear;
+  transition: 0.25s linear;
+  background-color: #8ebb8e;
+  color: #fff;
+}
+
+#wrapper #showAnswer:hover {
+  background-color: #6ca76c;
+}
+
+#wrapper .btnReload {
+  color: #fff;
+  background-color: #69cc59;
+}
+
+#wrapper .btnReload:hover {
+  color: #eee;
+  background-color: #57b649;
+}
+
+#wrapper .changelocation {
+  position: absolute;
+  left: 15px;
+  top: 20px;
+  border-radius: 5px;
+  color: #fff;
+  background-color: #303030;
+  padding: 0.5rem 1rem;
+  -webkit-transition: 0.25s linear;
+  transition: 0.25s linear;
+}
+
+#wrapper .changelocation i {
+  margin-right: 5px;
+}
+
+#wrapper .changelocation:hover {
+  background-color: #414141;
+}
+
+#wrapper .changePage {
+  position: absolute;
+  top: 50%;
+  width: 30px;
+  height: 30px;
+  border-radius: 100%;
+  background-color: #fff;
+  border: 2px solid #8ebb8e;
+  -webkit-transition: 0.2s linear;
+  transition: 0.2s linear;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+
+#wrapper .changePage i {
+  font-size: 1.4rem;
+  vertical-align: -4px;
+}
+
+#wrapper .changePage:hover {
+  border-color: #32bb32;
+}
+
+#wrapper .changePage.right {
+  right: 15px;
+}
+
+#wrapper .changePage.right i {
+  margin-left: 2px;
+}
+
+#wrapper .changePage.left {
+  left: 15px;
+}
+
+#wrapper .changePage.left i {
+  margin-right: 2px;
+}
+
+#wrapper #start:not(.changelocation) {
+  margin: 15px;
+  border-radius: 5px;
+  -webkit-transition: 0.3s linear;
+  transition: 0.3s linear;
+  padding: 0.5rem 2rem;
+  background-color: #e8e6e6;
+  color: #000;
+  font-size: 0.85rem;
+}
+
+#wrapper #start:not(.changelocation) i {
+  margin-right: 7px;
+}
+
+#wrapper #start:not(.changelocation):hover {
+  background-color: #d6d6d6;
+  color: #111;
+}
+
+#wrapper .questionBox {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: baseline;
+      -ms-flex-align: baseline;
+          align-items: baseline;
+  margin: 15px 0;
+}
+
+#wrapper .questionBox span {
+  width: 30px;
+  height: 30px;
+  padding: 5px;
+  margin: 0 10px;
+  border-radius: 100%;
+  border: 1px solid #ccc;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 1.3rem;
+  -webkit-transition: 0.25s ease;
+  transition: 0.25s ease;
+}
+
+#wrapper .questionBox span:hover {
+  border-color: #1d901d;
+  color: #1d901d;
+}
+/*# sourceMappingURL=mian.css.map */
