@@ -11,21 +11,21 @@ let score = 0
 let playerAnswer = []
 let nowQuestion = questions[currentIndexQuestion]
 
-const loadTemplate = () => {
+const loadTemplateStart = () => {
 	const container = document.querySelector('.container')
 	const content = `
         <div class="header">
             <span id="numberQuestion"></span>
             <span>آزمون ریاضی</span>
-            <span id="timer"></span>
+            <span id="timer">زمان باقی مانده</span>
         </div>
         <div class="question">
             <div class="question-title"></div>
             <div class="question-check"></div>
         </div>`
-	const newContainer = newElement('div', { className: 'container', innerHTML: content })
+	const newContainer = newElement('section', { className: 'container', innerHTML: content })
+
 	container.replaceWith(newContainer)
-    
 	questionBox = document.querySelector('.question-check')
 	questionTitle = document.querySelector('.question-title')
 	display = document.querySelector('#timer')
@@ -40,9 +40,9 @@ const updateTimer = () => {
 	if (timeLeft > 15) {
 		display.style.color = '#000'
 	} else if (timeLeft <= 15 && timeLeft >= 10) {
-		display.style.color = 'blue'
+		display.style.color = '#4081a2'
 	} else {
-		display.style.color = 'red'
+		display.style.color = '#D83C1B'
 	}
 	minutes = parseInt(timeLeft / 60, 10)
 	seconds = parseInt(timeLeft % 60, 10)
@@ -63,21 +63,21 @@ const toFarsiNumber = (n) => {
 		.map((x) => farsiDigits[x])
 		.join('')
 }
-
 const showNewQuestion = () => {
 	const wrongAnswers = nowQuestion.fake.split(',')
 	let allQuestions = []
 	questionBox.innerHTML = ''
+	display.innerHTML = 'در حال دریافت'
 	questionTitle.innerText = nowQuestion.question
 
 	for (const answer of wrongAnswers) {
 		const element = newElement('span', { className: 'question', innerText: toFarsiNumber(answer) })
-		element.addEventListener('click', checkAnswer)
+		element.addEventListener('click', finishQuestion)
 		allQuestions.push(element)
 	}
 
 	const answer = newElement('span', { className: 'question', innerText: toFarsiNumber(nowQuestion.answer) })
-	answer.addEventListener('click', checkAnswer)
+	answer.addEventListener('click', finishQuestion)
 	allQuestions.push(answer)
 
 	for (const n of randomNumber(0, wrongAnswers.length + 1)) {
@@ -85,18 +85,6 @@ const showNewQuestion = () => {
 	}
 
 	numberQuestion.innerText = `سوال ${toFarsiNumber(currentIndexQuestion + 1)} از ${toFarsiNumber(questions.length)}`
-}
-
-const checkAnswer = ({ target }) => {
-	playerAnswer.push(target.innerText)
-	if (target.innerText == toFarsiNumber(nowQuestion.answer)) {
-		score += 1
-	}
-	if (questions.length - 1 == currentIndexQuestion) {
-		finishTest()
-	} else {
-		finishQuestion()
-	}
 }
 
 const randomNumber = (minimum, maximum) => {
@@ -121,18 +109,60 @@ function newElement(tag, property) {
 	return elem
 }
 
-const finishQuestion = () => {
+const finishQuestion = (e) => {
+	const data = e ? e.target.innerText : null
 	clearInterval(timer)
-	nowQuestion = questions[++currentIndexQuestion]
+	playerAnswer.push(data)
+	if (data == toFarsiNumber(nowQuestion.answer)) {
+		score += 1
+	}
 	if (questions.length - 1 == currentIndexQuestion) {
-		finishTest()
+		loadTemplateFinish()
 	} else {
-        showNewQuestion()
+		nowQuestion = questions[++currentIndexQuestion]
+		showNewQuestion()
 		timeElapsed = 0
-        timer = setInterval(updateTimer, 1000)
+		timer = setInterval(updateTimer, 1000)
 	}
 }
-
-const finishTest = () => {
-	console.log('finish')
+const showAnswers = () => {
+	questionBox = document.querySelector('.question-check')
+	questionTitle = document.querySelector('.question-title')
+	questionTitle.innerText = nowQuestion.question
+	const answer = playerAnswer[currentIndexQuestion]
+	const checkAnswer = answer == toFarsiNumber(nowQuestion.answer)
+	questionBox.innerHTML = `<span class='${answer ? 'right-answer' : 'wrong-answer'}'>پاسخ شما 
+    ${answer ? `صحیح` : `غلط`} بوده است
+    ( ${answer ? answer : 'پاسخی ثبت نشده است'} )
+    </span>`
+}
+const goPage = (e) => {
+	currentIndexQuestion += e
+	if (currentIndexQuestion > questions.length - 1) {
+		currentIndexQuestion = 0
+	}
+	if (currentIndexQuestion == -1) {
+		currentIndexQuestion = questions.length - 1
+	}
+	nowQuestion = questions[currentIndexQuestion]
+	showAnswers()
+}
+const loadTemplateFinish = () => {
+	console.log(playerAnswer)
+	const container = document.querySelector('.container')
+	const content = `
+        <div class="header">
+            <span id="prev">سوال قبل</span>
+            <span>پایان آزمون ریاضی</span>
+            <span id="next">سوال بعدی</span>
+        </div>
+        <div class="question">
+            <div class="question-title"></div>
+            <div class="question-check"></div>
+        </div>`
+	const newContainer = newElement('section', { className: 'container', innerHTML: content })
+	container.replaceWith(newContainer)
+	document.querySelector('#next').addEventListener('click', () => goPage(1))
+	document.querySelector('#prev').addEventListener('click', () => goPage(-1))
+	showAnswers()
 }
