@@ -28,7 +28,7 @@ body {
 
 .container {
   width: 65vw;
-  height: 40vh;
+  height: 250px;
   -webkit-box-shadow: 0 0 5px #9b9b9b;
           box-shadow: 0 0 5px #9b9b9b;
 }
@@ -82,11 +82,10 @@ body {
   text-align: center;
   border-bottom: 1px solid #7c7c7c;
   padding: 15px 0;
-  height: 20%;
 }
 
-.container .question {
-  height: calc(80% - 15px);
+.container > .question {
+  height: 70%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -100,25 +99,67 @@ body {
   padding: 10px 0;
 }
 
-.container .question .question-title {
-  padding: 0 15px;
-  text-align: justify;
+.container > .question .question-title {
+  direction: ltr;
+  font-size: 1.35rem;
+  text-align: center;
+  margin-top: 25px;
 }
 
-.container .question .question-check {
+.container > .question .question-check {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-align: baseline;
+      -ms-flex-align: baseline;
+          align-items: baseline;
   -webkit-box-pack: space-evenly;
       -ms-flex-pack: space-evenly;
           justify-content: space-evenly;
 }
 
-.container .question .question-check label {
+.container > .question .question-check span {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  color: #fff;
+  border-radius: 5px;
+  -webkit-transition: all 0.27s;
+  transition: all 0.27s;
+  padding: 10px;
+}
+
+.container > .question .question-check .question {
+  font-size: 1.3rem;
+  background-color: #333;
+  cursor: pointer;
+}
+
+.container > .question .question-check .wrong-answer {
+  background-color: #cc2828;
+}
+
+.container > .question .question-check .right-answer {
+  background-color: #0d8a0d;
+}
+
+.container #prev,
+.container #next {
+  background-color: #eee;
+  padding: 5px;
+  border-radius: 5px;
+  -webkit-transition: all 0.25s;
+  transition: all 0.25s;
   -webkit-user-select: none;
      -moz-user-select: none;
       -ms-user-select: none;
           user-select: none;
   cursor: pointer;
+}
+
+.container #prev:hover,
+.container #next:hover {
+  background-color: #e4e2e2;
 }
 /*# sourceMappingURL=style.css.map */
