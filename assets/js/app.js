@@ -131,8 +131,8 @@ const showAnswers = () => {
 	questionTitle.innerText = nowQuestion.question
 	const answer = playerAnswer[currentIndexQuestion]
 	const checkAnswer = answer == toFarsiNumber(nowQuestion.answer)
-	questionBox.innerHTML = `<span class='${answer ? 'right-answer' : 'wrong-answer'}'>پاسخ شما 
-    ${answer ? `صحیح` : `غلط`} بوده است
+	questionBox.innerHTML = `<span class='${checkAnswer ? 'right-answer' : 'wrong-answer'}'>پاسخ شما 
+    ${checkAnswer ? `صحیح` : `غلط`} بوده است
     ( ${answer ? answer : 'پاسخی ثبت نشده است'} )
     </span>`
 }
@@ -148,7 +148,6 @@ const goPage = (e) => {
 	showAnswers()
 }
 const loadTemplateFinish = () => {
-	console.log(playerAnswer)
 	const container = document.querySelector('.container')
 	const content = `
         <div class="header">
